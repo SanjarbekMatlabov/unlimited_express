@@ -16,31 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('active');
         menuIcon.textContent = navLinks.classList.contains('active') ? '✖' : '☰';
     });
-
-    // Quote buttons functionality
-    document.querySelectorAll('.quote-btn, .btn-primary, .service-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Request a quote form will be displayed soon!');
-        });
-    });
-
-    // Apply buttons functionality
-    document.querySelectorAll('.apply-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Application form will be displayed soon!');
-        });
-    });
-
-    // Learn More button
-    document.querySelector('.btn-secondary').addEventListener('click', () => {
-        alert('Learn more about Unlimited Express Inc!');
-    });
-
-    // Chat icon functionality
-    document.querySelector('.chat-icon').addEventListener('click', () => {
-        alert('Chat support will be available soon!');
-    });
-
     // Smooth scroll for nav links
     document.querySelectorAll('.nav-links a, .footer-links a, .legal-links a').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
