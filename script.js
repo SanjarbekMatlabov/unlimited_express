@@ -12,15 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     const menuIcon = document.querySelector('.menu-icon');
     const navLinks = document.querySelector('.nav-links');
-    menuIcon.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        menuIcon.textContent = navLinks.classList.contains('active') ? '✖' : '☰';
-    });
-    // Smooth scroll for nav links
+    if (menuIcon && navLinks) {
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuIcon.textContent = navLinks.classList.contains('active') ? '✖' : '☰';
+        });
+    }
+
+    // Smooth scroll for nav links and footer links
     document.querySelectorAll('.nav-links a, .footer-links a, .legal-links a').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
+            const href = anchor.getAttribute('href');
+            // If the link is external (e.g., contact.html, privacy.html, terms.html), allow default navigation
+            if (!href.startsWith('#')) {
+                if (navLinks && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuIcon.textContent = '☰';
+                }
+                return; // Proceed with default navigation
+            }
+            // Handle internal anchor links (e.g., #services, #about)
             e.preventDefault();
-            const targetId = anchor.getAttribute('href').substring(1);
+            const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
                 window.scrollTo({
@@ -28,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
             }
-            if (navLinks.classList.contains('active')) {
+            if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 menuIcon.textContent = '☰';
             }
